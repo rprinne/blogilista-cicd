@@ -15,6 +15,6 @@ jobs:
           node-version: '20'
       - name: test backend
         run: |
-          npm run lint
           npm install
+          npm run lint
           npm run test:backend
