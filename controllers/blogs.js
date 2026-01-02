@@ -75,7 +75,7 @@ blogsRouter.post('/', (req, res, next) => {
       foundUser.blogs.push(savedBlog._id)
       return Promise.all([foundUser.save(), savedBlog])
     })
-    .then(([savedUser, savedBlog]) => {
+    .then(([, savedBlog]) => {
       res.status(201).json(savedBlog)
     })
     .catch(error => next(error))
