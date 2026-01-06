@@ -1,27 +1,27 @@
-const Blog = require('../models/blog')
+const Blog = require('../models/blog');
 
 const blogsInDb = async () => {
-  const blogs = await Blog.find({})
-  return blogs.map(blog => blog.toJSON())
-}
+  const blogs = await Blog.find({});
+  return blogs.map(blog => blog.toJSON());
+};
 
 const newBlog = {
   title: 'NewBlog',
   author: 'NewAuthor',
   url: 'NewUrl',
-}
+};
 
 const noTitleBlog = {
   author: 'NewAuthor',
   url: 'NewUrl',
   likes: 0
-}
+};
 
 const noAuthorBlog = {
   title: 'NewBlog',
   url: 'NewUrl',
   likes: 0
-}
+};
 
 const initialBlogs = [
   {
@@ -72,7 +72,7 @@ const initialBlogs = [
     likes: 2,
     __v: 0
   }
-]
+];
 
 const listWithOneBlog = [
   {
@@ -83,8 +83,8 @@ const listWithOneBlog = [
     likes: 5,
     __v: 0
   }
-]
+];
 
 module.exports = {
   blogsInDb, newBlog, noTitleBlog, noAuthorBlog, initialBlogs, listWithOneBlog
-}
+};
