@@ -13,6 +13,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: .env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENV_FILE }}" > .env         
       - name: run unit tests
         run: |
           npm install
