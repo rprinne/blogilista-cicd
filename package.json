@@ -5,15 +5,16 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "start:test": "cross-env NODE_ENV=test node index.js",
+    "start:backend:prod": "cross-env NODE_ENV=production node index.js",
+    "start:backend:dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start:backend:test": "cross-env NODE_ENV=test node index.js",
     "start:frontend": "react-scripts start",
     "build:frontend": "react-scripts build",
     "test:backend": "cross-env NODE_ENV=test jest --config jest.config.js --verbose --runInBand",
     "test:frontend": "react-scripts test",
     "eject:frontend": "react-scripts eject",
     "cypress:open": "cypress open",
+    "cypress:e2e": "cypress run",
     "lint": "eslint ."
   },
   "devDependencies": {

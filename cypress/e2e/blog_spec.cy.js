@@ -1,3 +1,5 @@
+import { blogCompareFn } from '../../src/functions'
+
 describe('Blog app', function() {
   const user = {
     name: 'testUser',
@@ -89,15 +91,26 @@ describe('Blog app', function() {
     })
 
     it('Blogs are sorted according to likes', function() {
+      // Testi blogien järjestys
+      // likes	title
+      // 10   	9
+      // 9	    8
+      // 8	    7
+      // 7	    3
+      // 6	    6
+      // 5	    2
+      // 4	    5
+      // 3	    4
+      // 2	    10
+      // 1	    1
       let blogs = []
-      let likes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-      likes.sort(() => (Math.random() > .5 ? 1 : -1))
+      let likes = [1,5,7,3,4,6,8,9,10,2]
       for (const i of [1,2,3,4,5,6,7,8,9,10]) {
         const blog = {
           title: `title${i}`,
           author: `author${i}`,
           url: `url${i}`,
-          likes: likes[i]
+          likes: likes[i-1]
         }
         blogs.push(blog)
       }
@@ -107,16 +120,16 @@ describe('Blog app', function() {
         cy.get('#author-input').type(blog.author)
         cy.get('#url-input').type(blog.url)
         cy.get('#submit-button').click()
-        cy.contains('view').last().click()
-        for (let i = 0; i < blog.likes; i++ ) {
+        cy.contains(blog.title).parent().contains('view').click()
+        for (let i = 1; i <= blog.likes; i++ ) {
           cy.get(`#${blog.title}`).within(() => {
-            cy.get('*[name^="like-button"]').click()
-            cy.wait(250)
+            cy.get('*[name^="like-button"]').should('be.enabled').click()
+            cy.contains(`likes: ${i}`)
           })
         }
       }
-      blogs.sort((a,b) => (a.likes > b.likes) ? -1 : 1)
-      console.log(blogs)
+      blogs.sort(blogCompareFn)
+      cy.log(JSON.stringify(blogs))
       for (let i = 0; i < 10; i++) {
         cy.get('.blog').eq(i).should('contain', blogs[i].title)
       }

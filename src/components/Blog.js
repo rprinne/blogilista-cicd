@@ -21,9 +21,9 @@ const Blog = ({ blog, user, handleLike, handleRemove }) => {
       <div className={'blog'} id={blog.title} style={blogStyle}>
         <p><span>{blog.title}</span> <em>by <span>{blog.author}</span></em> <button onClick={toggleExpanded}>hide</button><br/>
           <span>{blog.url}</span><br/>
-          <span>likes: {blog.likes}</span> <button name={'like-button'} onClick={handleLike}>like</button><br/>
+          <span>likes: {blog.likes}</span> <button name={'like-button'} onClick={() => handleLike(blog)}>like</button><br/>
           <span>{blog.user.name}</span><br/>
-          { user === blog.user.username ? <button onClick={handleRemove}>remove</button> : null }
+          { user === blog.user.username ? <button onClick={() => handleRemove(blog)}>remove</button> : null }
         </p>
       </div>
     )
