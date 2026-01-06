@@ -28,8 +28,6 @@ jobs:
       - name: run e2e tests
         uses: cypress-io/github-action@v5
         with:
-          command: |
-            npm run start:backend:test
-            npm run cypress:e2e
+          command: npm run cypress:e2e
+          start: npm run start:backend:test
           wait-on: http://localhoast:3003
-      
