@@ -34,3 +34,7 @@ jobs:
           command: npm run cypress:e2e
           start: npm run start:backend:test
           wait-on: http://localhost:3003
+      - name: Trigger deployment
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          curl ${{ secrets.RENDER_DEPLOY_HOOK }}
